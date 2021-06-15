@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView,TouchableOpacity, Image, Pressable, ScrollView } from 'react-native';
+import BigText from './components/BigText';
 
 export default function App() {
 
@@ -34,6 +35,10 @@ export default function App() {
       <View style={styles.header}>
         <Text>Yoki</Text>
       </View>
+
+      <BigText fontSize={22}  />
+      <BigText fontSize={32} text="Bonjour je m'appelle Toto"/>
+      <BigText fontSize={42} text="Bonjour je m'appelle Tata"/>
 
       <View style={styles.buttonContainer}>
         {/* Touchable */}     
