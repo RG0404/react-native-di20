@@ -1,11 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView,TouchableOpacity, Image, Pressable, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { Button, StyleSheet, Text, View, SafeAreaView,TouchableOpacity, Image, Pressable, ScrollView } from 'react-native';
 import Home from './pages/Home';
 import DemoState from './pages/DemoState';
 import LoremPicsum from './pages/LoremPicsum';
+import Login from './pages/Login';
 import Header from './components/Header';
 export default function App() {
+
+  const [page, navigate] = useState('Home');
 
   /* Ajout de variables avant le return */
   const items = [
@@ -45,9 +48,36 @@ export default function App() {
         <Header title="Homepage"/>
 
         {/* TODO: Ajouter navigation */}
-        {/* <Home appScan={onScanPress} appItems={items}/> */}
-        {/* <DemoState/> */}
-        <LoremPicsum/>
+        {page === 'Home' && <Home appScan={onScanPress} appItems={items}/>}
+        {page === 'DemoState' &&  <DemoState/>}
+        {page === 'LoremPicsum' &&  <LoremPicsum/>}
+        {page === 'Login' &&  <Login login={() => {alert('Je suis connecté !'); navigate('Home')}}/>}
+      
+
+        <View style={styles.topMenu}>
+          <Button 
+            title="Home" 
+            color={page === "Home" ? "green" : 'grey'}
+            onPress={() => navigate('Home')}
+            />
+          <Button 
+            title="State" 
+            color={page === "DemoState" ? "green" : 'grey'}
+            onPress={() => navigate('DemoState')}
+            />
+
+          <Button 
+            title="Picsum" 
+            color={page === "LoremPicsum" ? 'green' : 'grey'}
+            onPress={() => navigate('LoremPicsum')}
+            />
+
+          <Button 
+            title="Login" 
+            color={page === "Login" ? 'green' : 'grey'}
+            onPress={() => navigate('Login')}
+            />
+        </View>
 
     </SafeAreaView>
   );
@@ -57,5 +87,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-  }
+  },
+  topMenu: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around'
+  },
 });
