@@ -2,7 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView,TouchableOpacity, Image, Pressable, ScrollView } from 'react-native';
 import Home from './pages/Home';
-
+import DemoState from './pages/DemoState';
+import Header from './components/Header';
 export default function App() {
 
   /* Ajout de variables avant le return */
@@ -39,10 +40,13 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
         <StatusBar style="auto" />
+        {/* Header */}
+        <Header title="Homepage"/>
 
         {/* TODO: Ajouter navigation */}
+        {/* <Home appScan={onScanPress} appItems={items}/> */}
+        <DemoState/>
 
-      <Home appScan={onScanPress} appItems={items}/>
     </SafeAreaView>
   );
 }

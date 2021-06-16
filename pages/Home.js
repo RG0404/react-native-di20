@@ -7,13 +7,8 @@ import ProductsHistory from '../components/ProductsHistory';
 export default function Home(props){
     return (
        <View style={{flex: 1}}>
-            {/* Header */}
-            <Header title="Homepage"/>
-
             <ScanButtonView handleScanPress={props.appScan} />
-
             <ProductsHistory propsItem={props.appItems}/>
-            
         </View>
     )
 }
