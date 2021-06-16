@@ -3,6 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView,TouchableOpacity, Image, Pressable, ScrollView } from 'react-native';
 import Home from './pages/Home';
 import DemoState from './pages/DemoState';
+import LoremPicsum from './pages/LoremPicsum';
 import Header from './components/Header';
 export default function App() {
 
@@ -45,7 +46,8 @@ export default function App() {
 
         {/* TODO: Ajouter navigation */}
         {/* <Home appScan={onScanPress} appItems={items}/> */}
-        <DemoState/>
+        {/* <DemoState/> */}
+        <LoremPicsum/>
 
     </SafeAreaView>
   );
