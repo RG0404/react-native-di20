@@ -1,10 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView,TouchableOpacity, Image, Pressable, ScrollView } from 'react-native';
-import BigText from './components/BigText';
-import Header from './components/Header';
-import ScanButtonView from './components/ScanButtonView';
-import ProductsHistory from './components/ProductsHistory';
+import Home from './pages/Home';
 
 export default function App() {
 
@@ -32,9 +29,8 @@ export default function App() {
     },
   ]
 
-  function onScanPress(){
-    alert('Alert depuis App.js');
 
+  function onScanPress(){
     /* TOOD: Ouvrir une page pour l'appareil photo */
   }
 
@@ -42,21 +38,11 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header */}
-      <Header title="Homepage"/>
-{/* 
-      <BigText fontSize={22}  />
-      <BigText fontSize={32} text="Bonjour je m'appelle Toto"/>
-      <BigText fontSize={42} text="Bonjour je m'appelle Tata"/>
- */}
-      <ScanButtonView handleScanPress={onScanPress} />
+        <StatusBar style="auto" />
 
-      <ProductsHistory propsItem={items}/>
-      
-      <StatusBar style="auto" />
+        {/* TODO: Ajouter navigation */}
 
-      {/* TODO: Ajouter navigation */}
-      
+      <Home appScan={onScanPress} appItems={items}/>
     </SafeAreaView>
   );
 }
