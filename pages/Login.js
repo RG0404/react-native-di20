@@ -3,7 +3,6 @@ import {View, Button, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaVi
 
 export default function Login(props){
 
-    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     function checkPassword(str)
@@ -21,10 +20,10 @@ export default function Login(props){
     function checkAndLoginIn(){
         if(!checkPassword(password)){
             alert('Veuillez entrer un mot de passe correct')
-        } else if(!checkEmail(email)){
+        } else if(!checkEmail(props.email)){
             alert('Veuillez entrer une adresse email valide')
         } else {
-            if(email === 'contact@entreprise.com' && password === '$Motdepasse2'){
+            if(props.email === 'contact@entreprise.com' && password === '$Motdepasse2'){
                 props.login();
             } else {
                 alert('Utilisateur introuvable')
@@ -36,8 +35,8 @@ export default function Login(props){
         <View style={{flex: 1}}>
 
             <TextInput
-                value={email}
-                onChangeText={(str) => setEmail(str)}
+                value={props.email}
+                onChangeText={(str) => props.setEmail(str)}
 
                 placeholder="Votre adresse email"
                 autoCompleteType="email"
@@ -58,7 +57,7 @@ export default function Login(props){
 
             <Button
                 title="Se connecter"
-                disabled={(email === '' || password === '')}
+                disabled={(props.email === '' || password === '')}
                 onPress={checkAndLoginIn}
             />
 

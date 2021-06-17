@@ -1,13 +1,13 @@
 import React from 'react';
-import {Text, StyleSheet, View} from 'react-native'
+import {Text, StyleSheet, View, TouchableOpacity} from 'react-native'
 
 export default function ProductItem(props){
 
     return (
-        <View key={props.data.id} style={styles.articleContainer}>
-            <Text style={sText.articleTitle}>{props.data.title}</Text>
-            <Text style={sText.articleDesc}>{props.data.date}</Text>
-        </View> 
+        <TouchableOpacity key={props.data.id} style={styles.articleContainer} onPress={() => props.onPressItem(props.data)}>
+            <Text style={sText.articleTitle}>{props.data.product.brands}</Text>
+            <Text style={sText.articleDesc}>{props.data.code}</Text>
+        </TouchableOpacity> 
     )
 }
 

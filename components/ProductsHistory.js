@@ -8,7 +8,7 @@ export default function ProductHistory(props){
       {
         props.propsItem.map(el => {
           return (
-            <ProductItem data={el}/>  
+            <ProductItem data={el} onPressItem={props.onPressItem}/>  
           )
         })
       }

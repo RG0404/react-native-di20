@@ -6,6 +6,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import Home from './pages/Home';
 import DemoState from './pages/DemoState';
 import LoremPicsum from './pages/LoremPicsum';
+import Product from './pages/Product';
 import Login from './pages/Login';
 import AppCamera from './pages/AppCamera';
 import Header from './components/Header';
@@ -15,6 +16,9 @@ export default function App() {
   const [page, navigate] = useState('Home');
   const [hasPermission, setHasPermission] = useState(null);
   const [products, setProducts] = useState([]);
+  const [currentProduct, setCurrentProduct] = useState(null);
+
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -24,31 +28,6 @@ export default function App() {
   }, []);
 
 
-  /* Ajout de variables avant le return */
-  const items = [
-    { id: 1,
-      title: 'Canette soda test',
-      date: 'Demain à 00:00'
-    },
-    { id: 2,
-      title: 'Canette soda test 2',
-      date: 'Demain à 00:00'
-    },
-    { id: 3,
-      title: 'Cookies du crous ',
-      date: 'Demain à 00:00'
-    },
-    { id: 4,
-      title: 'Pizza',
-      date: 'Demain à 00:00'
-    },
-    { id: 5,
-      title: 'Bière',
-      date: 'Demain à 00:00'
-    },
-  ]
-
-
   function onScanPress(){
     /* TOOD: Ouvrir une page pour l'appareil photo */
     navigate('Camera');
@@ -56,7 +35,6 @@ export default function App() {
 
   async function onBarCodeScan({data, type}){
     await getProductInfoFromApi(data);
-    // ICI le code a attendu d'avoir la réponse de l'API
   }
 
 
@@ -73,10 +51,17 @@ export default function App() {
       let _products = products;
       _products.push(responseJson);
       setProducts(_products);
+      setCurrentProduct(responseJson)
+      navigate('Product');
 
     } catch (error) {
       console.error(error);
     }
+  }
+
+  function showProduct(pressedItem){
+    setCurrentProduct(pressedItem);
+    navigate('Product');
   }
 
   /* Fonction Appel API */
@@ -88,11 +73,12 @@ export default function App() {
         <Header title={page}/>
 
         {/* TODO: Ajouter navigation */}
-        {page === 'Home' && <Home appScan={onScanPress} appItems={items}/>}
+        {page === 'Home' && <Home email={email} appScan={onScanPress} appItems={products} onPressItem={showProduct}/>}
         {page === 'Camera' && <AppCamera handleBarCodeScanned={onBarCodeScan}/>}
 {/*         {page === 'DemoState' &&  <DemoState/>}
         {page === 'LoremPicsum' &&  <LoremPicsum/>} */}
-        {page === 'Login' &&  <Login login={() => {alert('Je suis connecté !'); navigate('Home')}}/>}
+        {page === 'Login' &&  <Login email={email} setEmail={setEmail} login={() => {alert('Je suis connecté !'); navigate('Home')}}/>}
+        {page === 'Product' &&  <Product product={currentProduct} />}
       
 
         <View style={styles.topMenu}>
